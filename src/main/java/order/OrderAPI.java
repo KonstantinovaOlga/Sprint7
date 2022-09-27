@@ -1,4 +1,5 @@
-package Order;
+package order;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
@@ -11,6 +12,7 @@ public class OrderAPI {
         this.order = order;
     }
 
+    @Step("Creating of order")
     public Response addOrder() {
         Response response =
                 given()

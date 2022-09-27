@@ -1,6 +1,12 @@
-package Order;
+package order;
+import config.MethodOfChecking;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.apache.http.HttpStatus.SC_CREATED;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -12,7 +18,7 @@ public class OrderObjTest {
 
     private OrderObj order;
     private final String[] color;
-
+    private MethodOfChecking methods;
     public OrderObjTest(String[] color) {
         this.color = color;
     }
@@ -29,19 +35,19 @@ public class OrderObjTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = Config.URL.URL;
+        RestAssured.baseURI = config.URL.URL;
         this.order = new OrderObj();
         this.order = this.order.getRandomOrder(color);
+        this.methods=new MethodOfChecking();
     }
 
     @Test
+    @DisplayName("Creating of order")
+    @Description("Creating of order with different colors, check code and getting of track")
     public void createNewOrder() {
-
         OrderAPI orderAPIObj = new OrderAPI(this.order);
         Response response = orderAPIObj.addOrder();
-        response.then().assertThat()
-                .statusCode(201)
-                .and()
-                .body("track", notNullValue());
+        this.methods.checkCode(response,SC_CREATED);
+        this.methods.fieldDoesntEmpety(response,"track");
     }
 }

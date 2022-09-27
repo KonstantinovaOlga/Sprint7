@@ -1,4 +1,4 @@
-package ListOfOrder;
+package list_of_order;
 
 public class CreatedOrder {
 

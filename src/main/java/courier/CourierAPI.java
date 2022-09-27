@@ -1,4 +1,5 @@
-package Courier;
+package courier;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -11,6 +12,8 @@ public class CourierAPI {
         this.courier = courier;
     }
 
+
+    @Step("Creating of courier")
     public Response addCourier() {
         Response response =
                 given()
@@ -22,6 +25,7 @@ public class CourierAPI {
         return response;
     }
 
+    @Step("Login of courier")
     public Response loginCourier() {
         Response response =
                 given()
@@ -33,6 +37,7 @@ public class CourierAPI {
         return response;
     }
 
+    @Step("Getting of courier's id")
     public String getCourierId() {
         String userId = "/" +
                 given().
@@ -49,6 +54,7 @@ public class CourierAPI {
         return userId;
     }
 
+    @Step("Deleting of courier")
     public Response deleteCourier() {
 
         String userId = getCourierId();

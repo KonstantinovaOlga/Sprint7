@@ -1,4 +1,5 @@
-package Order;
+package order;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import java.util.Random;
 
@@ -101,6 +102,7 @@ public class OrderObj {
     public OrderObj() {
     }
 
+    @Step("Generating of order")
     public OrderObj getRandomOrder (String[] color){
         Random random = new Random();
         int randRentTime = random.nextInt(300);

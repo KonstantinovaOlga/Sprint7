@@ -1,4 +1,5 @@
-package Courier;
+package courier;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class CourierObj {
@@ -34,6 +35,7 @@ public class CourierObj {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+    @Step("Generating of courier")
     public CourierObj getRandomCourier() {
         return new CourierObj(
                 RandomStringUtils.randomAlphanumeric(10),
